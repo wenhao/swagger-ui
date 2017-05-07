@@ -2,6 +2,7 @@ import React, { PropTypes } from "react"
 
 //import "./topbar.less"
 import Logo from "./logo_small.png"
+import Select from 'react-select'
 
 export default class Topbar extends React.Component {
 
@@ -25,6 +26,15 @@ export default class Topbar extends React.Component {
     e.preventDefault()
   }
 
+  options = [
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' }
+  ];
+
+  logChange(val) {
+    console.log("Selected: " + val);
+  }
+
   render() {
     let { getComponent, specSelectors } = this.props
     const Button = getComponent("Button")
@@ -45,6 +55,18 @@ export default class Topbar extends React.Component {
                 <span>swagger</span>
               </Link>
               <form className="download-url-wrapper" onSubmit={this.downloadUrl}>
+                <Select
+                name="form-field-name"
+                value="Environment"
+                options={this.options}
+                onChange={this.logChange}
+                />
+                <Select
+                name="form-field-name"
+                value="Project"
+                options={this.options}
+                onChange={this.logChange}
+                />
                 <input className="download-url-input" type="text" onChange={ this.onUrlChange } value={this.state.url} disabled={isLoading} style={inputStyle} />
                 <Button className="download-url-button" onClick={ this.downloadUrl }>Explore</Button>
               </form>

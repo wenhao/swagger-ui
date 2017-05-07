@@ -3,13 +3,12 @@ import "../style/main.scss"
 
 // import TopbarPlugin from "plugins/topbar"
 import ConfigsPlugin from "plugins/configs"
-import ParameterTopbarPlugin from "plugins/topbar"
+import TopbarPlugin from "plugins/topbar"
 
 // the Standalone preset
 
 let preset = [
-  // TopbarPlugin,
-  ParameterTopbarPlugin,
+  TopbarPlugin,
   ConfigsPlugin,
   () => {
     return {
