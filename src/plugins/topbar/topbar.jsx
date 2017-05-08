@@ -15,8 +15,6 @@ export default class Topbar extends React.Component {
     this.envOptions = map(this.envs, function(value, prop) {
        return { value: prop, label: prop}
     })
-    this.environment = '';
-    this.project = '';
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,24 +32,16 @@ export default class Topbar extends React.Component {
     e.preventDefault()
   }
 
-  //envChange(val) {
-    //this.environment = val
-    //let selectEnv = get(this.envs, val)
-    //this.projectOptions = map(selectEnv, function(value, prop) {
-      //return { value: value, label: prop}
-    //})
-  //}
-
   envChange =(e)=> {
-    this.environment = e.value
-    let selectEnv = get(this.envs, this.environment)
+    let selectEnv = get(this.envs, e.value)
     this.projectOptions = map(selectEnv, function(value, prop) {
       return { value: value, label: prop}
     })
+    this.setState({environment: e.value})
   }
 
   projectChange =(e)=> {
-    this.project = e.value
+    this.setState({project: e.value})
   }
 
   render() {
@@ -75,16 +65,18 @@ export default class Topbar extends React.Component {
               </Link>
               <form className="download-url-wrapper" onSubmit={this.downloadUrl}>
                 <Select
-                name="environment"
-                placeholder="Environment..."
-                options={this.envOptions}
-                onChange={this.envChange}
+                  name="environment"
+                  placeholder="Environment..."
+                  options={ this.envOptions }
+                  onChange={ this.envChange }
+                  value={ this.state.environment }
                 />
                 <Select
-                name="project"
-                placeholder="Project..."
-                options={this.projectOptions}
-                onChange={this.projectChange}
+                  name="project"
+                  placeholder="Project..."
+                  options={ this.projectOptions }
+                  onChange={ this.projectChange }
+                  value={ this.state.project }
                 />
                 <input className="download-url-input" type="text" onChange={ this.onUrlChange } value={this.state.url} disabled={isLoading} style={inputStyle} />
                 <Button className="download-url-button" onClick={ this.downloadUrl }>Explore</Button>
