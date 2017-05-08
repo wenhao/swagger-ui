@@ -13,7 +13,7 @@ export default class Topbar extends React.Component {
     this.state = { url: props.specSelectors.url() }
     this.envs = props.getConfigs().envs
     this.envOptions = map(this.envs, function(value, prop) {
-       return { value: prop, label: prop}
+       return { value: prop, label: prop }
     })
   }
 
@@ -35,14 +35,14 @@ export default class Topbar extends React.Component {
   envChange =(e)=> {
     let selectEnv = get(this.envs, e.value)
     this.projectOptions = map(selectEnv, function(value, prop) {
-      return { value: value, label: prop}
+      return { value: value, label: prop }
     })
-    this.setState({environment: e.value})
+    this.setState({ environment: e.value })
   }
 
   projectChange =(e)=> {
-    this.setState({project: e.value})
-    this.setState({url: e.value})
+    this.setState({ project: e.value })
+    this.setState({ url: e.value })
   }
 
   render() {
