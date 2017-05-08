@@ -42,6 +42,7 @@ export default class Topbar extends React.Component {
 
   projectChange =(e)=> {
     this.setState({project: e.value})
+    this.setState({url: e.value})
   }
 
   render() {
