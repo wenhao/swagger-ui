@@ -56,14 +56,14 @@ export default class Topbar extends React.Component {
               </Link>
               <form className="download-url-wrapper" onSubmit={this.downloadUrl}>
                 <Select
-                name="form-field-name"
-                value="Environment"
+                name="environment"
+                placeholder="Environment..."
                 options={this.options}
                 onChange={this.logChange}
                 />
                 <Select
-                name="form-field-name"
-                value="Project"
+                name="project"
+                placeholder="Project..."
                 options={this.options}
                 onChange={this.logChange}
                 />
