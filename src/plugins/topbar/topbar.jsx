@@ -2,7 +2,6 @@ import React, { PropTypes } from "react"
 
 //import "./topbar.less"
 import Logo from "./logo_small.png"
-import Select from 'react-select'
 import map from "lodash/map"
 import get from "lodash/get"
 
@@ -15,6 +14,7 @@ export default class Topbar extends React.Component {
     this.envOptions = map(this.envs, function(value, prop) {
        return { value: prop, label: prop }
     })
+    this.projectOptions = []
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,16 +33,16 @@ export default class Topbar extends React.Component {
   }
 
   envChange =(e)=> {
-    let selectEnv = get(this.envs, e.value)
+    let selectEnv = get(this.envs, e.target.value)
     this.projectOptions = map(selectEnv, function(value, prop) {
       return { value: value, label: prop }
     })
-    this.setState({ environment: e.value })
+    this.setState({ environment: e.target.value })
   }
 
   projectChange =(e)=> {
-    this.setState({ project: e.value })
-    this.setState({ url: e.value })
+    this.setState({ project: e.target.value })
+    this.setState({ url: e.target.value })
   }
 
   render() {
@@ -65,20 +65,20 @@ export default class Topbar extends React.Component {
                 <span>swagger</span>
               </Link>
               <form className="download-url-wrapper" onSubmit={this.downloadUrl}>
-                <Select
-                  name="environment"
-                  placeholder="Environment..."
-                  options={ this.envOptions }
-                  onChange={ this.envChange }
+                <select className="environment"
                   value={ this.state.environment }
-                />
-                <Select
-                  name="project"
-                  placeholder="Project..."
-                  options={ this.projectOptions }
-                  onChange={ this.projectChange }
+                  onChange={this.envChange} >
+                  { this.envOptions.map( (item) => {
+                    return <option key={ item.label } value={ item.value }>{ item.label }</option>
+                  })}
+                </select>
+                <select className="project"
                   value={ this.state.project }
-                />
+                  onChange={ this.projectChange } >
+                  { this.projectOptions.map( (item) => {
+                    return <option key={ item.label } value={ item.value }>{ item.label }</option>
+                  })}
+                </select>
                 <input className="download-url-input" type="text" onChange={ this.onUrlChange } value={this.state.url} disabled={isLoading} style={inputStyle} />
                 <Button className="download-url-button" onClick={ this.downloadUrl }>Explore</Button>
               </form>
