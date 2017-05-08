@@ -32,13 +32,16 @@ export default class Topbar extends React.Component {
   ];
 
   logChange(val) {
-    console.log("Selected: " + val);
+    console.log("Selected: " + val)
   }
 
   render() {
-    let { getComponent, specSelectors } = this.props
+    let { getComponent, specSelectors, getConfigs } = this.props
     const Button = getComponent("Button")
     const Link = getComponent("Link")
+
+    const configs = getConfigs()
+    console.log("Configs: " + configs.envs)
 
     let isLoading = specSelectors.loadingStatus() === "loading"
     let isFailed = specSelectors.loadingStatus() === "failed"
@@ -81,5 +84,6 @@ export default class Topbar extends React.Component {
 Topbar.propTypes = {
   specSelectors: PropTypes.object.isRequired,
   specActions: PropTypes.object.isRequired,
-  getComponent: PropTypes.func.isRequired
+  getComponent: PropTypes.func.isRequired,
+  getConfigs: PropTypes.any
 }
