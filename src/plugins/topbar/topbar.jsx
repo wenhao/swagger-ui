@@ -1,6 +1,6 @@
 import React, { PropTypes } from "react"
 
-//import "./topbar.less"
+import "./topbar.less"
 import Logo from "./logo_small.png"
 import map from "lodash/map"
 import get from "lodash/get"
