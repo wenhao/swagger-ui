@@ -14,7 +14,9 @@ export default class Topbar extends React.Component {
     this.envOptions = map(this.envs, function(value, prop) {
        return { value: prop, label: prop }
     })
-    this.projectOptions = []
+    this.projectOptions = map(get(this.envs, this.envOptions[0].value), function(value, prop) {
+      return { value: value, label: prop }
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,6 +40,9 @@ export default class Topbar extends React.Component {
       return { value: value, label: prop }
     })
     this.setState({ environment: e.target.value })
+
+    this.setState({ project: this.projectOptions[0].value })
+    this.setState({ url: this.projectOptions[0].value })
   }
 
   projectChange =(e)=> {
