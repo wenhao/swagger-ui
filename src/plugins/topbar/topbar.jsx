@@ -3,12 +3,20 @@ import React, { PropTypes } from "react"
 //import "./topbar.less"
 import Logo from "./logo_small.png"
 import Select from 'react-select'
+import map from "lodash/map"
+import get from "lodash/get"
 
 export default class Topbar extends React.Component {
 
   constructor(props, context) {
     super(props, context)
     this.state = { url: props.specSelectors.url() }
+    this.envs = props.getConfigs().envs
+    this.envOptions = map(this.envs, function(value, prop) {
+       return { value: prop, label: prop}
+    })
+    this.environment = '';
+    this.project = '';
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,22 +34,30 @@ export default class Topbar extends React.Component {
     e.preventDefault()
   }
 
-  options = [
-    { value: 'one', label: 'One' },
-    { value: 'two', label: 'Two' }
-  ];
+  //envChange(val) {
+    //this.environment = val
+    //let selectEnv = get(this.envs, val)
+    //this.projectOptions = map(selectEnv, function(value, prop) {
+      //return { value: value, label: prop}
+    //})
+  //}
 
-  logChange(val) {
-    console.log("Selected: " + val)
+  envChange =(e)=> {
+    this.environment = e.value
+    let selectEnv = get(this.envs, this.environment)
+    this.projectOptions = map(selectEnv, function(value, prop) {
+      return { value: value, label: prop}
+    })
+  }
+
+  projectChange =(e)=> {
+    this.project = e.value
   }
 
   render() {
-    let { getComponent, specSelectors, getConfigs } = this.props
+    let { getComponent, specSelectors } = this.props
     const Button = getComponent("Button")
     const Link = getComponent("Link")
-
-    const configs = getConfigs()
-    console.log("Configs: " + configs.envs)
 
     let isLoading = specSelectors.loadingStatus() === "loading"
     let isFailed = specSelectors.loadingStatus() === "failed"
@@ -61,14 +77,14 @@ export default class Topbar extends React.Component {
                 <Select
                 name="environment"
                 placeholder="Environment..."
-                options={this.options}
-                onChange={this.logChange}
+                options={this.envOptions}
+                onChange={this.envChange}
                 />
                 <Select
                 name="project"
                 placeholder="Project..."
-                options={this.options}
-                onChange={this.logChange}
+                options={this.projectOptions}
+                onChange={this.projectChange}
                 />
                 <input className="download-url-input" type="text" onChange={ this.onUrlChange } value={this.state.url} disabled={isLoading} style={inputStyle} />
                 <Button className="download-url-button" onClick={ this.downloadUrl }>Explore</Button>
