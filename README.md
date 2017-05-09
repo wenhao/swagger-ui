@@ -2,6 +2,8 @@
 
 [![NPM version](https://badge.fury.io/js/swagger-ui.svg)](http://badge.fury.io/js/swagger-ui)
 
+![Swagger UI](./swagger-ui.png)
+
 ## New!
 
 **This is the new version of swagger-ui, 3.x. Want to learn more? Check out our [FAQ](http://swagger.io/new-ui-faq/).**
