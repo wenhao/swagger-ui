@@ -5,8 +5,10 @@ validatorUrl: "https://online.swagger.io/validator"
 oauth2RedirectUrl: "http://localhost:3200/oauth2-redirect.html"
 envs:
   dev:
-    sync: "http://petstore.swagger.io/v2/dev/sync.json"
-    gateway: "http://petstore.swagger.io/v2/dev/gateway.json"
+    project-one: "http://petstore.swagger.io/v2/dev/project-one.json"
+    project-two: "http://petstore.swagger.io/v2/dev/project-two.json"
   test:
-    sync: "http://petstore.swagger.io/v2/test/sync.json"
-    gateway: "http://petstore.swagger.io/v2/test/gateway.json"
+    project-one: "http://petstore.swagger.io/v2/test/project-one.json"
+    project-two: "http://petstore.swagger.io/v2/test/project-two.json"
+  uat:
+    project-one: "http://petstore.swagger.io/v2/uat/project-one.json"
